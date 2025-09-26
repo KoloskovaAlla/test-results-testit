@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "b4a22436-7740-4295-9b46-65f4099e3b8a",
+		"name": "Site Registry API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37126811"
+	},
+	"item": [
+		{
+			"name": "Search Sites - dialog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?SearchString=dialog",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "SearchString",
+							"value": "dialog"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://rest.test.m13.local/api/spider/SiteRegistry/sites?SearchString=dialog' \\\r\n--header 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Sites - ria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?SearchString=ria",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "SearchString",
+							"value": "ria"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://rest.test.m13.local/api/spider/SiteRegistry/sites?SearchString=ria' \\\r\n--header 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Sites - no results (123zxc)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?SearchString=123zxc",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "SearchString",
+							"value": "123zxc"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://rest.test.m13.local/api/spider/SiteRegistry/sites?SearchString=123zxc' \\\r\n--header 'accept: application/json'"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {\r",
+					"    pm.response.to.have.status(200);\r",
+					"});\r",
+					"\r",
+					"pm.test(\"Response time is acceptable\", function () {\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(10000);\r",
+					"});\r",
+					"\r",
+					"pm.test(\"Response structure is valid\", function () {\r",
+					"    const sites = pm.response.json();\r",
+					"    pm.expect(sites).to.be.an('array');\r",
+					"});\r",
+					"\r",
+					"pm.test(\"SearchString filter works correctly\", function () {\r",
+					"    const searchString = pm.request.url.query.get(\"SearchString\");\r",
+					"    const sites = pm.response.json();\r",
+					"    \r",
+					"    console.log(`Searching for: \"${searchString}\"`);\r",
+					"    console.log(`Found ${sites.length} sites`);\r",
+					"    \r",
+					"    sites.forEach((site, index) => {\r",
+					"        const nameContains = site.name.toLowerCase().includes(searchString.toLowerCase());\r",
+					"        console.log(`Site ${index + 1}: ${site.name} - Contains \"${searchString}\": ${nameContains}`);\r",
+					"        \r",
+					"        pm.expect(nameContains, \r",
+					"            `Site \"${site.name}\" should contain search string \"${searchString}\"`\r",
+					"        ).to.be.true;\r",
+					"    });\r",
+					"});"
+				]
+			}
+		}
+	]
+}

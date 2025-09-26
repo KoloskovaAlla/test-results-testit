@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "9ab3d353-eef7-4a1a-b700-cc0714e2826a",
+		"name": "OnlyImportant (negative)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37126811"
+	},
+	"item": [
+		{
+			"name": "OnlyImportant=\"true\"",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?OnlyImportant=\"true\"",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "OnlyImportant",
+							"value": "\"true\""
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://rest.test.m13.local/api/spider/SiteRegistry/sites?OnlyImportant=true\" -H \"accept: application/json\""
+			},
+			"response": []
+		},
+		{
+			"name": "OnlyImportant=\"false\"",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?OnlyImportant=\"false\"",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "OnlyImportant",
+							"value": "\"false\""
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://rest.test.m13.local/api/spider/SiteRegistry/sites?OnlyImportant=true\" -H \"accept: application/json\""
+			},
+			"response": []
+		},
+		{
+			"name": "OnlyImportant=\"1\"",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?OnlyImportant=\"1\"",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "OnlyImportant",
+							"value": "\"1\""
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://rest.test.m13.local/api/spider/SiteRegistry/sites?OnlyImportant=true\" -H \"accept: application/json\""
+			},
+			"response": []
+		},
+		{
+			"name": "OnlyImportant=\"abc\"",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?OnlyImportant=\"abc\"",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "OnlyImportant",
+							"value": "\"abc\""
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://rest.test.m13.local/api/spider/SiteRegistry/sites?OnlyImportant=true\" -H \"accept: application/json\""
+			},
+			"response": []
+		},
+		{
+			"name": "OnlyImportant=1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?OnlyImportant=1",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "OnlyImportant",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://rest.test.m13.local/api/spider/SiteRegistry/sites?OnlyImportant=true\" -H \"accept: application/json\""
+			},
+			"response": []
+		},
+		{
+			"name": "OnlyImportant=0",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?OnlyImportant=0",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "OnlyImportant",
+							"value": "0"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://rest.test.m13.local/api/spider/SiteRegistry/sites?OnlyImportant=true\" -H \"accept: application/json\""
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.test(\"Запрос отклонен, статус 400\", function () {\r",
+					"    pm.response.to.have.status(400)\r",
+					"});\r",
+					"\r",
+					"pm.test(\"OnlyImportant валидирует тип данных\", function () {\r",
+					"    const jsonResponse = pm.response.json();\r",
+					"    pm.expect(jsonResponse).to.have.property('errors');\r",
+					"    pm.expect(jsonResponse.errors).to.have.property('OnlyImportant');\r",
+					"    pm.expect(jsonResponse.errors.OnlyImportant).to.be.an('array');\r",
+					"    pm.expect(jsonResponse.errors.OnlyImportant).length.to.be.above(0);\r",
+					"    pm.expect(jsonResponse.errors.OnlyImportant[0]).contains('not valid');\r",
+					"});"
+				]
+			}
+		}
+	]
+}

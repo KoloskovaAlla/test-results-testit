@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "949fe1d7-c1a0-474b-90b6-44c85f1fb2e5",
+		"name": "Skip + Take",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37126811"
+	},
+	"item": [
+		{
+			"name": "Skip=0&Take=10",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=10",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "Skip",
+							"value": "0"
+						},
+						{
+							"key": "Take",
+							"value": "10"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=10\" -H \"accept: application/json\""
+			},
+			"response": []
+		},
+		{
+			"name": "Skip=10&Take=10",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=10&Take=10",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "Skip",
+							"value": "10"
+						},
+						{
+							"key": "Take",
+							"value": "10"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=10&Take=10\" -H \"accept: application/json\""
+			},
+			"response": []
+		},
+		{
+			"name": "Skip=0&Take=1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=1",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "Skip",
+							"value": "0"
+						},
+						{
+							"key": "Take",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=10&Take=10' \\\r\n--header 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Skip=0&Take=5",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=5",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "Skip",
+							"value": "0"
+						},
+						{
+							"key": "Take",
+							"value": "5"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=1' \\\r\n--header 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Skip=20&Take=10",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=20&Take=10",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "Skip",
+							"value": "20"
+						},
+						{
+							"key": "Take",
+							"value": "10"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=5' \\\r\n--header 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Skip=0&Take=50",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=5",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "Skip",
+							"value": "0"
+						},
+						{
+							"key": "Take",
+							"value": "5"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=5' \\\r\n--header 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Skip=5&Take=15",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=5",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "Skip",
+							"value": "0"
+						},
+						{
+							"key": "Take",
+							"value": "5"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=5' \\\r\n--header 'accept: application/json'"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {\r",
+					"    pm.response.to.have.status(200);\r",
+					"});\r",
+					"\r",
+					"pm.test(\"Response time is acceptable\", function () {\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+					"});\r",
+					"\r",
+					"pm.test(\"Returned correct number of items based on Take parameter\", function () {\r",
+					"    // Получаем значение параметра Take из URL запроса\r",
+					"    const takeParam = pm.request.url.query.get('Take');\r",
+					"    \r",
+					"    // Преобразуем в число (параметр приходит как строка)\r",
+					"    const expectedCount = parseInt(takeParam);\r",
+					"    \r",
+					"    // Получаем ответ и проверяем количество элементов\r",
+					"    const responseJson = pm.response.json();\r",
+					"    const actualCount = responseJson.length;\r",
+					"    \r",
+					"    // Выводим информацию для отладки\r",
+					"    console.log('Take parameter from URL:', takeParam);\r",
+					"    console.log('Expected items count:', expectedCount);\r",
+					"    console.log('Actual items count:', actualCount);\r",
+					"    \r",
+					"    // Проверяем соответствие\r",
+					"    pm.expect(actualCount).to.equal(expectedCount);\r",
+					"});\r",
+					""
+				]
+			}
+		}
+	]
+}

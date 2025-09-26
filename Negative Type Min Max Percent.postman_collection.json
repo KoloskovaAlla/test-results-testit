@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "340452fd-ca0b-4389-960d-1a7b37bf5e99",
+		"name": "Negative Type Min Max Percent",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37126811"
+	},
+	"item": [
+		{
+			"name": "\"два\" / 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"MinimumPercent корректно отклоняет строковые значения\", function () {\r",
+							"    // Отправляем MinimumPercent=\"abc\"\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400, 422]); // Bad Request или Unprocessable Entity\r",
+							"    \r",
+							"    const response = pm.response.json();\r",
+							"    // console.log(response)\r",
+							"    pm.expect(response).to.have.property('errors');\r",
+							"    console.log(response.errors)\r",
+							"    pm.expect(response.errors.MinimumPercent[0]).to.include('is not valid for');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?MinimumPercent=два&MaximumPercent=3",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "MinimumPercent",
+							"value": "два"
+						},
+						{
+							"key": "MaximumPercent",
+							"value": "3"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://rest.test.m13.local/api/spider/SiteRegistry/sites?MinimumPercent=20&MaximumPercent=21\" -H \"accept: application/json\""
+			},
+			"response": []
+		},
+		{
+			"name": "2 / \"три\"",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"MaximumPercent корректно отклоняет строковые значения\", function () {\r",
+							"    // Отправляем MinimumPercent=\"abc\"\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400, 422]); // Bad Request или Unprocessable Entity\r",
+							"    \r",
+							"    const response = pm.response.json();\r",
+							"    // console.log(response)\r",
+							"    pm.expect(response).to.have.property('errors');\r",
+							"    console.log(response.errors)\r",
+							"    pm.expect(response.errors.MaximumPercent[0]).to.include('is not valid for');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?MinimumPercent=2&MaximumPercent=\"три\"",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "MinimumPercent",
+							"value": "2"
+						},
+						{
+							"key": "MaximumPercent",
+							"value": "\"три\""
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://rest.test.m13.local/api/spider/SiteRegistry/sites?MinimumPercent=20&MaximumPercent=21\" -H \"accept: application/json\""
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
