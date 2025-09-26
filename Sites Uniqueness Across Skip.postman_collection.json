@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "2b742842-791f-4393-9a0a-c4c4b4bc62b3",
+		"name": "Sites Uniqueness Across Skip",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37126811"
+	},
+	"item": [
+		{
+			"name": "Skip=0&Take=10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Save IDs from first request\", function () {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    \r",
+							"    // Извлекаем ID из массива сайтов\r",
+							"    const firstRequestIds = responseJson.map(site => site.id);\r",
+							"    \r",
+							"    // Сохраняем в переменной коллекции для использования во втором запросе\r",
+							"    pm.collectionVariables.set(\"firstRequestIds\", JSON.stringify(firstRequestIds));\r",
+							"    \r",
+							"    // Логирование для отладки\r",
+							"    // console.log('First request site IDs:', firstRequestIds);\r",
+							"    // console.log('Total sites in first request:',firstRequestIds.length);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=10",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "Skip",
+							"value": "0"
+						},
+						{
+							"key": "Take",
+							"value": "10"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=10' \\\r\n--header 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Skip=10&Take=10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"No duplicate sites between different Skip values\", function () {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const secondRequestIds = responseJson.map(site => site.id);\r",
+							"    const firstRequestIds = JSON.parse(pm.collectionVariables.get(\"firstRequestIds\") || \"[]\");\r",
+							"    \r",
+							"    console.log('Second request site IDs:', secondRequestIds);\r",
+							"    console.log('First request site IDs:', firstRequestIds);\r",
+							"    \r",
+							"    // Основная проверка уникальности\r",
+							"    const intersection = secondRequestIds.filter(id => firstRequestIds.includes(id));\r",
+							"    \r",
+							"    console.log('Intersecting IDs:', intersection);\r",
+							"    \r",
+							"    pm.expect(intersection.length).to.equal(0, \r",
+							"        `Found ${intersection.length} duplicate site(s) between different Skip values: ${intersection.join(', ')}`);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=10&Take=10",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "Skip",
+							"value": "10"
+						},
+						{
+							"key": "Take",
+							"value": "10"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://rest.test.m13.local/api/spider/SiteRegistry/sites?Skip=0&Take=10' \\\r\n--header 'accept: application/json'"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "firstRequestIds",
+			"value": ""
+		}
+	]
+}

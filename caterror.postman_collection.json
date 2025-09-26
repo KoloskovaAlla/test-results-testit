@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "58975cc8-6186-426f-a143-3009ccf09765",
+		"name": "Cat Error Login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37126811"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"В ответе есть поле ticketNumber\", function () {\r",
+							"    const jsonData = pm.response.json(); \r",
+							"    pm.expect(jsonData.data.login).to.have.property('ticketNumber');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"user-agent": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\"",
+						"disabled": true
+					},
+					{
+						"key": "DateFormat",
+						"value": "UnixTimestamp",
+						"disabled": true
+					},
+					{
+						"key": "Referer",
+						"value": "https://botsman.fet.m13.dev/cat2/login",
+						"disabled": true
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
+						"disabled": true
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-AppId",
+						"value": "1"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation Login($credentials: LoginRequest) {\n  login(credentials: $credentials) {\n    ticketNumber\n  }\n}",
+						"variables": "{\n  \"credentials\": {    \n    \"deviceHash\": \"eraefuafaqмhhfydaa\", \n    \"productId\": 1, \n    \"password\": \"API_test_user\",\n    \"username\": \"API\"\n  }\n}"
+					}
+				},
+				"url": {
+					"raw": "https://botsman.fet.m13.dev/api/graphql/",
+					"protocol": "https",
+					"host": [
+						"botsman",
+						"fet",
+						"m13",
+						"dev"
+					],
+					"path": [
+						"api",
+						"graphql",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl 'https://botsman.fet.m13.dev/api/graphql/' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'DateFormat: UnixTimestamp' \\\r\n  -H 'Referer: https://botsman.fet.m13.dev/cat2/login' \\\r\n  -H 'sec-ch-ua: \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'X-AppId: 1' \\\r\n  --data-raw '{\"operationName\":\"Login\",\"variables\":{\"credentials\":{\"deviceDescription\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36; botsman.fet.m13.dev\",\"deviceHash\":\"cfaa1129-2c3b-4e23-acdd-fb7a87293ed3\",\"deviceModel\":\"Win32\",\"deviceName\":\"\",\"productId\":1,\"pushToken\":\"\",\"password\":\"Mini-tester\",\"username\":\"Mini-tester\"}},\"query\":\"mutation Login($credentials: LoginRequest) {\\n  login(credentials: $credentials) {\\n    ticketNumber\\n  }\\n}\"}'"
+			},
+			"response": []
+		}
+	]
+}

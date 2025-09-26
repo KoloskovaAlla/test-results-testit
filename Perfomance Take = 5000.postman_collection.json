@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "8439edfa-99f2-4f36-9260-a1392e124991",
+		"name": "Perfomance Take = 5000",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37126811"
+	},
+	"item": [
+		{
+			"name": "Take=5000",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://rest.test.m13.local/api/spider/SiteRegistry/sites?Take=5000",
+					"protocol": "http",
+					"host": [
+						"rest",
+						"test",
+						"m13",
+						"local"
+					],
+					"path": [
+						"api",
+						"spider",
+						"SiteRegistry",
+						"sites"
+					],
+					"query": [
+						{
+							"key": "Take",
+							"value": "5000"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://rest.test.m13.local/api/spider/SiteRegistry/sites?Take=100' \\\r\n--header 'accept: application/json'"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"const time = pm.response.responseTime;\r",
+					"console.log(\"Take=200\");\r",
+					"\r",
+					"const maxAllowedTime = 450;\r",
+					"\r",
+					"const isTimeAcceptable = time < maxAllowedTime;\r",
+					"\r",
+					"if (!pm.environment.has('passedTests')) {\r",
+					"    pm.environment.set('passedTests', 0);\r",
+					"    pm.environment.set('failedTests', 0);\r",
+					"}\r",
+					"\r",
+					"if (time >= maxAllowedTime) {\r",
+					"    let failed = pm.environment.get('failedTests') + 1;\r",
+					"    pm.environment.set('failedTests', failed);\r",
+					"    \r",
+					"    pm.test(`ПРЕВЫШЕНИЕ ЛИМИТА! Время ответа - ${time}ms, лимит - ${maxAllowedTime}ms`, function () {        \r",
+					"        pm.expect(time).to.be.below(maxAllowedTime);\r",
+					"    });\r",
+					"} else {\r",
+					"    let passed = pm.environment.get('passedTests') + 1;\r",
+					"    pm.environment.set('passedTests', passed);\r",
+					"    \r",
+					"    pm.test(`Время ответа в пределах норма. Время ответа - ${time}ms, лимит - ${maxAllowedTime}ms`, function () {        \r",
+					"        pm.expect(time).to.be.below(maxAllowedTime);\r",
+					"    });\r",
+					"}\r",
+					"\r",
+					"console.log(`✅ Пройдено: ${pm.environment.get('passedTests')}, ❌ Упало: ${pm.environment.get('failedTests')}`);\r",
+					"\r",
+					"let passed = pm.environment.get('passedTests');\r",
+					"let failed = pm.environment.get('failedTests');\r",
+					"let total = passed + failed;\r",
+					"\r",
+					"if (total > 0) {\r",
+					"    let passPercent = ((passed / total) * 100).toFixed(1);\r",
+					"    let failPercent = ((failed / total) * 100).toFixed(1);\r",
+					"    console.log(`📊 Статистика: ${passPercent}% успех, ${failPercent}% провал`);\r",
+					"}"
+				]
+			}
+		}
+	]
+}
