@@ -32,20 +32,37 @@ async function uploadNewmanResults(newmanJsonPath, testRunName) {
         console.log(`Статус ответа: ${execution.response.code}`);
         console.log(`Время ответа: ${execution.response.responseTime}ms`);
 
+        // Создаем шаги для каждой проверки (assertion)
+        const steps = [];
+        
+        // Добавляем основной шаг для HTTP запроса
+        steps.push({
+            title: 'HTTP Request',
+            description: `${execution.request.method} ${execution.request.url.protocol}://${execution.request.url.host.join('.')}`
+        });
+
+        // Добавляем шаг для каждой проверки
+        if (execution.assertions && execution.assertions.length > 0) {
+            execution.assertions.forEach((assertion, index) => {
+                steps.push({
+                    title: assertion.assertion,
+                    description: `Проверка ${index + 1}: ${assertion.assertion}${assertion.skipped ? ' (пропущена)' : ''}`
+                });
+            });
+        }
+
+        console.log(`Найдено проверок: ${execution.assertions ? execution.assertions.length : 0}`);
+
         // Сначала создаем автотест
         const autoTestExternalId = `newman-${execution.item.name.replace(/\s+/g, '-')}-${Date.now()}`;
         
         const autoTest = {
             externalId: autoTestExternalId,
+            // то, что выводится при клике на прогон в качестве название автотеста
             name: `Newman: ${execution.item.name}`,
             projectId: config.projectId,
             description: `Newman автотест: ${execution.item.name}`,
-            steps: [
-                {
-                    title: 'HTTP Request',
-                    description: `${execution.request.method} ${execution.request.url.protocol}://${execution.request.url.host.join('.')}`
-                }
-            ]
+            steps: steps // Используем созданные шаги
         };
 
         console.log('Создание автотеста...');
@@ -54,6 +71,7 @@ async function uploadNewmanResults(newmanJsonPath, testRunName) {
         // Создаем тест-ран
         console.log('Создание тест-рана...');
         const testRunRequest = {
+            //то, что будет выводиться как название тест-рана в Test IT
             name: testRunName || `Newman Test - ${new Date().toLocaleString()}`,
             projectId: config.projectId
         };
@@ -70,12 +88,22 @@ async function uploadNewmanResults(newmanJsonPath, testRunName) {
         const endTime = new Date();
         const startTime = new Date(endTime.getTime() - execution.response.responseTime);
 
+        // Создаем подробное сообщение с результатами всех проверок
+        let detailedMessage = `${execution.item.name}: ${execution.response.responseTime}ms, Status: ${execution.response.code}\n`;
+        if (execution.assertions && execution.assertions.length > 0) {
+            detailedMessage += 'Проверки:\n';
+            execution.assertions.forEach((assertion, index) => {
+                const status = assertion.skipped ? 'SKIPPED' : 'PASSED';
+                detailedMessage += `${index + 1}. ${assertion.assertion} - ${status}\n`;
+            });
+        }
+
         const autoTestResult = {
             configurationId: config.configurationId,
             autoTestExternalId: autoTestExternalId,
             outcome: outcome,
             duration: execution.response.responseTime,
-            message: `${execution.item.name}: ${execution.response.responseTime}ms, Status: ${execution.response.code}`,
+            message: detailedMessage,
             traces: JSON.stringify({
                 request: execution.request,
                 response: execution.response,
@@ -89,10 +117,6 @@ async function uploadNewmanResults(newmanJsonPath, testRunName) {
         console.log('Загрузка результата...');
         await testRunsApi.setAutoTestResultsForTestRun(testRunId, [autoTestResult]);
         console.log(`Результат загружен: ${outcome}`);
-
-        // Завершаем тест-ран
-        // await testRunsApi.completeTestRun(testRunId);
-        // console.log(`Тест-ран завершен!`);
 
         console.log(`Готово! Тест-ран "${testRunName}" с результатом создан в Test IT`);
         return testRunId;
@@ -112,8 +136,8 @@ const newmanJsonFile = process.argv[2];
 const testRunName = process.argv[3];
 
 if (!newmanJsonFile) {
-    console.log('📝 Использование: node newman-to-testit.js <newman-json-file> [test-run-name]');
-    console.log('📝 Пример: node newman-to-testit.js results/test-resultsCat.json "Cat Login Test"');
+    console.log('Использование: node newman-to-testit.js <newman-json-file> [test-run-name]');
+    console.log('Пример: node newman-to-testit.js results/test-resultsCat.json "Cat Login Test"');
     process.exit(1);
 }
 
