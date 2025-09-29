@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 
 const config = {
     testItUrl: 'https://team-srrx.testit.software',
-    token: 'SFJaeTdYZzJHNEJjOHpzWDUy',
+    token: 'V0tCYURMZjBhNWNnUHpCOVhW',
     projectId: '01990ad4-0c23-77d9-8b67-7d71ba2dd99f',
     configurationId: '01990ad4-0c31-7df0-be83-3046e37c9f58'
 };
@@ -59,7 +59,7 @@ async function uploadNewmanResults(newmanJsonPath, testRunName) {
         const autoTest = {
             externalId: autoTestExternalId,
             // то, что выводится при клике на прогон в качестве название автотеста
-            name: `Newman: ${execution.item.name}`,
+            name: `Newman test: ${execution.item.name}`,
             projectId: config.projectId,
             description: `Newman автотест: ${execution.item.name}`,
             steps: steps // Используем созданные шаги
@@ -72,7 +72,7 @@ async function uploadNewmanResults(newmanJsonPath, testRunName) {
         console.log('Создание тест-рана...');
         const testRunRequest = {
             //то, что будет выводиться как название тест-рана в Test IT
-            name: testRunName || `Newman Test - ${new Date().toLocaleString()}`,
+            name: testRunName || `Test  of - ${new Date().toLocaleString()}`,
             projectId: config.projectId
         };
 
@@ -90,13 +90,26 @@ async function uploadNewmanResults(newmanJsonPath, testRunName) {
 
         // Создаем подробное сообщение с результатами всех проверок
         let detailedMessage = `${execution.item.name}: ${execution.response.responseTime}ms, Status: ${execution.response.code}\n`;
-        if (execution.assertions && execution.assertions.length > 0) {
-            detailedMessage += 'Проверки:\n';
-            execution.assertions.forEach((assertion, index) => {
-                const status = assertion.skipped ? 'SKIPPED' : 'PASSED';
-                detailedMessage += `${index + 1}. ${assertion.assertion} - ${status}\n`;
-            });
+     if (execution.assertions && execution.assertions.length > 0) {
+    detailedMessage += 'Проверки:\n';
+    execution.assertions.forEach((assertion, index) => {
+        let status;
+        if (assertion.skipped) {
+            status = 'SKIPPED';
+        } else if (assertion.error) {
+            status = 'FAILED';
+        } else {
+            status = 'PASSED';
         }
+        
+        detailedMessage += `${index + 1}. ${assertion.assertion} - ${status}\n`;
+        
+        // Добавляем детали ошибки для упавших тестов
+        if (assertion.error) {
+            detailedMessage += `   Ошибка: ${assertion.error.message}\n`;
+        }
+    });
+}
 
         const autoTestResult = {
             configurationId: config.configurationId,
