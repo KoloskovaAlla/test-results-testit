@@ -1,0 +1,891 @@
+{
+  "collection": {
+    "_": {
+      "postman_id": "a65b96d6-fca7-4c64-97c8-4edba86c04dc",
+      "exporter_id": "37126811"
+    },
+    "item": [
+      {
+        "id": "41468467-4a3b-4057-882f-670955bb40f5",
+        "name": "Login",
+        "request": {
+          "description": {
+            "content": "Generated from cURL: curl 'https://botsman.fet.m13.dev/api/graphql/' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'DateFormat: UnixTimestamp' \\\r\n  -H 'Referer: https://botsman.fet.m13.dev/cat2/login' \\\r\n  -H 'sec-ch-ua: \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'X-AppId: 1' \\\r\n  --data-raw '{\"operationName\":\"Login\",\"variables\":{\"credentials\":{\"deviceDescription\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36; botsman.fet.m13.dev\",\"deviceHash\":\"cfaa1129-2c3b-4e23-acdd-fb7a87293ed3\",\"deviceModel\":\"Win32\",\"deviceName\":\"\",\"productId\":1,\"pushToken\":\"\",\"password\":\"Mini-tester\",\"username\":\"Mini-tester\"}},\"query\":\"mutation Login($credentials: LoginRequest) {\\n  login(credentials: $credentials) {\\n    ticketNumber\\n  }\\n}\"}'",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "graphql",
+              ""
+            ],
+            "host": [
+              "botsman",
+              "fet",
+              "m13",
+              "dev"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "disabled": true,
+              "key": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "disabled": true,
+              "key": "DateFormat",
+              "value": "UnixTimestamp"
+            },
+            {
+              "disabled": true,
+              "key": "Referer",
+              "value": "https://botsman.fet.m13.dev/cat2/login"
+            },
+            {
+              "disabled": true,
+              "key": "sec-ch-ua",
+              "value": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\""
+            },
+            {
+              "disabled": true,
+              "key": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "disabled": true,
+              "key": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+            },
+            {
+              "disabled": true,
+              "key": "Accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-AppId",
+              "value": "1"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "graphql",
+            "graphql": {
+              "query": "mutation Login($credentials: LoginRequest) {\n  login(credentials: $credentials) {\n    ticketNumber\n  }\n}",
+              "variables": "{\n  \"credentials\": {    \n    \"deviceHash\": \"eraefuafahhfydaa\", \n    \"productId\": 1, \n    \"password\": \"API_test_user\",\n    \"username\": \"API_test_user\"\n  }\n}"
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "9871b502-de23-471e-91bc-305210d28b01",
+              "type": "text/javascript",
+              "packages": {},
+              "exec": [
+                "pm.test(\"Status code is 200\", function () {\r",
+                "    pm.response.to.have.status(200);\r",
+                "});\r",
+                "\r",
+                "pm.test(\"Content-Type: application/json\", function () {\r",
+                "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                "});\r",
+                "\r",
+                "pm.test(\"В ответе есть поле ticketNumber\", function () {\r",
+                "    let jsonData = pm.response.json(); \r",
+                "    pm.expect(jsonData.data.login).to.have.property('ticketNumber');\r",
+                "});\r",
+                "\r",
+                "pm.test(\"Status code is 400\", function () {\r",
+                "    pm.response.to.have.status(400);\r",
+                "});"
+              ],
+              "_lastExecutionId": "43893b72-4d89-4dc5-889f-48234508f052"
+            }
+          }
+        ],
+        "protocolProfileBehavior": {
+          "disabledSystemHeaders": {
+            "accept": true,
+            "user-agent": true,
+            "accept-encoding": true,
+            "connection": true
+          }
+        }
+      }
+    ],
+    "event": [],
+    "variable": [],
+    "info": {
+      "_postman_id": "a65b96d6-fca7-4c64-97c8-4edba86c04dc",
+      "name": "Катюша Login",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    }
+  },
+  "environment": {
+    "id": "0202de6e-0675-4d24-b500-e469f0acc6c3",
+    "values": []
+  },
+  "globals": {
+    "id": "7bd06518-8be0-449a-a36f-383c69beac90",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 4,
+        "pending": 0,
+        "failed": 1
+      },
+      "testScripts": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 102,
+      "responseMin": 102,
+      "responseMax": 102,
+      "responseSd": 0,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1759130178315,
+      "completed": 1759130178520
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 1,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "37fd09a0-af72-4007-9bba-4d3f2445a87e",
+          "httpRequestId": "937635fc-4cda-45e6-9e1c-c6af3219ce21"
+        },
+        "item": {
+          "id": "41468467-4a3b-4057-882f-670955bb40f5",
+          "name": "Login",
+          "request": {
+            "description": {
+              "content": "Generated from cURL: curl 'https://botsman.fet.m13.dev/api/graphql/' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'DateFormat: UnixTimestamp' \\\r\n  -H 'Referer: https://botsman.fet.m13.dev/cat2/login' \\\r\n  -H 'sec-ch-ua: \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'X-AppId: 1' \\\r\n  --data-raw '{\"operationName\":\"Login\",\"variables\":{\"credentials\":{\"deviceDescription\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36; botsman.fet.m13.dev\",\"deviceHash\":\"cfaa1129-2c3b-4e23-acdd-fb7a87293ed3\",\"deviceModel\":\"Win32\",\"deviceName\":\"\",\"productId\":1,\"pushToken\":\"\",\"password\":\"Mini-tester\",\"username\":\"Mini-tester\"}},\"query\":\"mutation Login($credentials: LoginRequest) {\\n  login(credentials: $credentials) {\\n    ticketNumber\\n  }\\n}\"}'",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "graphql",
+                ""
+              ],
+              "host": [
+                "botsman",
+                "fet",
+                "m13",
+                "dev"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": true,
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "disabled": true,
+                "key": "DateFormat",
+                "value": "UnixTimestamp"
+              },
+              {
+                "disabled": true,
+                "key": "Referer",
+                "value": "https://botsman.fet.m13.dev/cat2/login"
+              },
+              {
+                "disabled": true,
+                "key": "sec-ch-ua",
+                "value": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\""
+              },
+              {
+                "disabled": true,
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "disabled": true,
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+              },
+              {
+                "disabled": true,
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-AppId",
+                "value": "1"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Login($credentials: LoginRequest) {\n  login(credentials: $credentials) {\n    ticketNumber\n  }\n}",
+                "variables": "{\n  \"credentials\": {    \n    \"deviceHash\": \"eraefuafahhfydaa\", \n    \"productId\": 1, \n    \"password\": \"API_test_user\",\n    \"username\": \"API_test_user\"\n  }\n}"
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "9871b502-de23-471e-91bc-305210d28b01",
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Content-Type: application/json\", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"В ответе есть поле ticketNumber\", function () {\r",
+                  "    let jsonData = pm.response.json(); \r",
+                  "    pm.expect(jsonData.data.login).to.have.property('ticketNumber');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});"
+                ],
+                "_lastExecutionId": "43893b72-4d89-4dc5-889f-48234508f052"
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disabledSystemHeaders": {
+              "accept": true,
+              "user-agent": true,
+              "accept-encoding": true,
+              "connection": true
+            }
+          }
+        },
+        "request": {
+          "description": {
+            "content": "Generated from cURL: curl 'https://botsman.fet.m13.dev/api/graphql/' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'DateFormat: UnixTimestamp' \\\r\n  -H 'Referer: https://botsman.fet.m13.dev/cat2/login' \\\r\n  -H 'sec-ch-ua: \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'X-AppId: 1' \\\r\n  --data-raw '{\"operationName\":\"Login\",\"variables\":{\"credentials\":{\"deviceDescription\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36; botsman.fet.m13.dev\",\"deviceHash\":\"cfaa1129-2c3b-4e23-acdd-fb7a87293ed3\",\"deviceModel\":\"Win32\",\"deviceName\":\"\",\"productId\":1,\"pushToken\":\"\",\"password\":\"Mini-tester\",\"username\":\"Mini-tester\"}},\"query\":\"mutation Login($credentials: LoginRequest) {\\n  login(credentials: $credentials) {\\n    ticketNumber\\n  }\\n}\"}'",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "graphql",
+              ""
+            ],
+            "host": [
+              "botsman",
+              "fet",
+              "m13",
+              "dev"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "disabled": true,
+              "key": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "disabled": true,
+              "key": "DateFormat",
+              "value": "UnixTimestamp"
+            },
+            {
+              "disabled": true,
+              "key": "Referer",
+              "value": "https://botsman.fet.m13.dev/cat2/login"
+            },
+            {
+              "disabled": true,
+              "key": "sec-ch-ua",
+              "value": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\""
+            },
+            {
+              "disabled": true,
+              "key": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "disabled": true,
+              "key": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+            },
+            {
+              "disabled": true,
+              "key": "Accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-AppId",
+              "value": "1"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "05eb2f5f-0ca8-4141-9c59-0a1bb177d3aa",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "botsman.fet.m13.dev",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "288",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "graphql",
+            "graphql": {
+              "query": "mutation Login($credentials: LoginRequest) {\n  login(credentials: $credentials) {\n    ticketNumber\n  }\n}",
+              "variables": "{\n  \"credentials\": {    \n    \"deviceHash\": \"eraefuafahhfydaa\", \n    \"productId\": 1, \n    \"password\": \"API_test_user\",\n    \"username\": \"API_test_user\"\n  }\n}"
+            }
+          }
+        },
+        "response": {
+          "id": "5ab66864-4d86-443a-ac92-6501f498b62b",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 29 Sep 2025 07:16:18 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "74"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "apollo-trace-id",
+              "value": "33ed03d64159da4ed012e18139dc66ae"
+            },
+            {
+              "key": "vary",
+              "value": "origin"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store, no-cache, private"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              97,
+              116,
+              97,
+              34,
+              58,
+              123,
+              34,
+              108,
+              111,
+              103,
+              105,
+              110,
+              34,
+              58,
+              123,
+              34,
+              116,
+              105,
+              99,
+              107,
+              101,
+              116,
+              78,
+              117,
+              109,
+              98,
+              101,
+              114,
+              34,
+              58,
+              34,
+              102,
+              56,
+              97,
+              98,
+              52,
+              102,
+              51,
+              99,
+              45,
+              54,
+              57,
+              51,
+              99,
+              45,
+              52,
+              50,
+              97,
+              50,
+              45,
+              57,
+              100,
+              102,
+              52,
+              45,
+              51,
+              50,
+              54,
+              52,
+              99,
+              97,
+              97,
+              101,
+              101,
+              51,
+              48,
+              56,
+              34,
+              125,
+              125,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 102,
+          "responseSize": 74
+        },
+        "id": "41468467-4a3b-4057-882f-670955bb40f5",
+        "assertions": [
+          {
+            "assertion": "Status code is 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Content-Type: application/json",
+            "skipped": false
+          },
+          {
+            "assertion": "В ответе есть поле ticketNumber",
+            "skipped": false
+          },
+          {
+            "assertion": "Status code is 400",
+            "skipped": false,
+            "error": {
+              "name": "AssertionError",
+              "index": 3,
+              "test": "Status code is 400",
+              "message": "expected response to have status code 400 but got 200",
+              "stack": "AssertionError: expected response to have status code 400 but got 200\n   at Object.eval sandbox-script.js:4:1)"
+            }
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 74
+    },
+    "failures": [
+      {
+        "error": {
+          "name": "AssertionError",
+          "index": 3,
+          "test": "Status code is 400",
+          "message": "expected response to have status code 400 but got 200",
+          "stack": "AssertionError: expected response to have status code 400 but got 200\n   at Object.eval sandbox-script.js:4:1)",
+          "checksum": "819d8f574ba3b91ad52151b19a9db4d2",
+          "id": "3a6ce579-0a70-4c4a-84be-d29205f661e8",
+          "timestamp": 1759130178506,
+          "stacktrace": [
+            {
+              "fileName": "sandbox-script.js",
+              "lineNumber": 4,
+              "functionName": "Object.eval",
+              "typeName": "Object",
+              "methodName": "eval",
+              "columnNumber": 1,
+              "native": false
+            }
+          ]
+        },
+        "at": "assertion:3 in test-script",
+        "source": {
+          "id": "41468467-4a3b-4057-882f-670955bb40f5",
+          "name": "Login",
+          "request": {
+            "description": {
+              "content": "Generated from cURL: curl 'https://botsman.fet.m13.dev/api/graphql/' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'DateFormat: UnixTimestamp' \\\r\n  -H 'Referer: https://botsman.fet.m13.dev/cat2/login' \\\r\n  -H 'sec-ch-ua: \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'X-AppId: 1' \\\r\n  --data-raw '{\"operationName\":\"Login\",\"variables\":{\"credentials\":{\"deviceDescription\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36; botsman.fet.m13.dev\",\"deviceHash\":\"cfaa1129-2c3b-4e23-acdd-fb7a87293ed3\",\"deviceModel\":\"Win32\",\"deviceName\":\"\",\"productId\":1,\"pushToken\":\"\",\"password\":\"Mini-tester\",\"username\":\"Mini-tester\"}},\"query\":\"mutation Login($credentials: LoginRequest) {\\n  login(credentials: $credentials) {\\n    ticketNumber\\n  }\\n}\"}'",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "graphql",
+                ""
+              ],
+              "host": [
+                "botsman",
+                "fet",
+                "m13",
+                "dev"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": true,
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "disabled": true,
+                "key": "DateFormat",
+                "value": "UnixTimestamp"
+              },
+              {
+                "disabled": true,
+                "key": "Referer",
+                "value": "https://botsman.fet.m13.dev/cat2/login"
+              },
+              {
+                "disabled": true,
+                "key": "sec-ch-ua",
+                "value": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\""
+              },
+              {
+                "disabled": true,
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "disabled": true,
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+              },
+              {
+                "disabled": true,
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-AppId",
+                "value": "1"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Login($credentials: LoginRequest) {\n  login(credentials: $credentials) {\n    ticketNumber\n  }\n}",
+                "variables": "{\n  \"credentials\": {    \n    \"deviceHash\": \"eraefuafahhfydaa\", \n    \"productId\": 1, \n    \"password\": \"API_test_user\",\n    \"username\": \"API_test_user\"\n  }\n}"
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "9871b502-de23-471e-91bc-305210d28b01",
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Content-Type: application/json\", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"В ответе есть поле ticketNumber\", function () {\r",
+                  "    let jsonData = pm.response.json(); \r",
+                  "    pm.expect(jsonData.data.login).to.have.property('ticketNumber');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});"
+                ],
+                "_lastExecutionId": "43893b72-4d89-4dc5-889f-48234508f052"
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disabledSystemHeaders": {
+              "accept": true,
+              "user-agent": true,
+              "accept-encoding": true,
+              "connection": true
+            }
+          }
+        },
+        "parent": {
+          "_": {
+            "postman_id": "a65b96d6-fca7-4c64-97c8-4edba86c04dc",
+            "exporter_id": "37126811"
+          },
+          "item": [
+            {
+              "id": "41468467-4a3b-4057-882f-670955bb40f5",
+              "name": "Login",
+              "request": {
+                "description": {
+                  "content": "Generated from cURL: curl 'https://botsman.fet.m13.dev/api/graphql/' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'DateFormat: UnixTimestamp' \\\r\n  -H 'Referer: https://botsman.fet.m13.dev/cat2/login' \\\r\n  -H 'sec-ch-ua: \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'X-AppId: 1' \\\r\n  --data-raw '{\"operationName\":\"Login\",\"variables\":{\"credentials\":{\"deviceDescription\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36; botsman.fet.m13.dev\",\"deviceHash\":\"cfaa1129-2c3b-4e23-acdd-fb7a87293ed3\",\"deviceModel\":\"Win32\",\"deviceName\":\"\",\"productId\":1,\"pushToken\":\"\",\"password\":\"Mini-tester\",\"username\":\"Mini-tester\"}},\"query\":\"mutation Login($credentials: LoginRequest) {\\n  login(credentials: $credentials) {\\n    ticketNumber\\n  }\\n}\"}'",
+                  "type": "text/plain"
+                },
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "api",
+                    "graphql",
+                    ""
+                  ],
+                  "host": [
+                    "botsman",
+                    "fet",
+                    "m13",
+                    "dev"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": true,
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  },
+                  {
+                    "disabled": true,
+                    "key": "DateFormat",
+                    "value": "UnixTimestamp"
+                  },
+                  {
+                    "disabled": true,
+                    "key": "Referer",
+                    "value": "https://botsman.fet.m13.dev/cat2/login"
+                  },
+                  {
+                    "disabled": true,
+                    "key": "sec-ch-ua",
+                    "value": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\""
+                  },
+                  {
+                    "disabled": true,
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "disabled": true,
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+                  },
+                  {
+                    "disabled": true,
+                    "key": "Accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "X-AppId",
+                    "value": "1"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Login($credentials: LoginRequest) {\n  login(credentials: $credentials) {\n    ticketNumber\n  }\n}",
+                    "variables": "{\n  \"credentials\": {    \n    \"deviceHash\": \"eraefuafahhfydaa\", \n    \"productId\": 1, \n    \"password\": \"API_test_user\",\n    \"username\": \"API_test_user\"\n  }\n}"
+                  }
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "9871b502-de23-471e-91bc-305210d28b01",
+                    "type": "text/javascript",
+                    "packages": {},
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Content-Type: application/json\", function () {\r",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"В ответе есть поле ticketNumber\", function () {\r",
+                      "    let jsonData = pm.response.json(); \r",
+                      "    pm.expect(jsonData.data.login).to.have.property('ticketNumber');\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});"
+                    ],
+                    "_lastExecutionId": "43893b72-4d89-4dc5-889f-48234508f052"
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true,
+                  "user-agent": true,
+                  "accept-encoding": true,
+                  "connection": true
+                }
+              }
+            }
+          ],
+          "event": [],
+          "variable": [],
+          "info": {
+            "_postman_id": "a65b96d6-fca7-4c64-97c8-4edba86c04dc",
+            "name": "Катюша Login",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 1,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "37fd09a0-af72-4007-9bba-4d3f2445a87e",
+          "httpRequestId": "937635fc-4cda-45e6-9e1c-c6af3219ce21",
+          "scriptId": "9871b502-de23-471e-91bc-305210d28b01",
+          "execution": "43893b72-4d89-4dc5-889f-48234508f052"
+        }
+      }
+    ],
+    "error": null
+  }
+}
