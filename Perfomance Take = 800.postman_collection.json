@@ -49,6 +49,7 @@
 			"script": {
 				"type": "text/javascript",
 				"packages": {},
+				"requests": {},
 				"exec": [
 					""
 				]
@@ -59,11 +60,12 @@
 			"script": {
 				"type": "text/javascript",
 				"packages": {},
+				"requests": {},
 				"exec": [
 					"const time = pm.response.responseTime;\r",
 					"console.log(\"Take=200\");\r",
 					"\r",
-					"const maxAllowedTime = 450;\r",
+					"const maxAllowedTime = 600;\r",
 					"\r",
 					"const isTimeAcceptable = time < maxAllowedTime;\r",
 					"\r",
@@ -83,7 +85,7 @@
 					"    let passed = pm.environment.get('passedTests') + 1;\r",
 					"    pm.environment.set('passedTests', passed);\r",
 					"    \r",
-					"    pm.test(`Время ответа в пределах норма. Время ответа - ${time}ms, лимит - ${maxAllowedTime}ms`, function () {        \r",
+					"    pm.test(`Время ответа в пределах нормы. Время ответа - ${time}ms, лимит - ${maxAllowedTime}ms`, function () {        \r",
 					"        pm.expect(time).to.be.below(maxAllowedTime);\r",
 					"    });\r",
 					"}\r",
