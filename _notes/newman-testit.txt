@@ -1,3 +1,10 @@
-newman run "CatLogin.postman_collection.json" -r "cli,json" --reporter-json-export results/catLoginResults.json - для выполнения теста и сохранения результатов в отчет
+newman run "CatLogin400.postman_collection.json" -r "cli,json" --reporter-json-export results/catLogin400Results.json - для выполнения теста и сохранения результатов в отчет
 
-node newman-to-testit.js results/catLoginResults.json для чтения этого отчета и загрузки результатов в Test IT
+node newman-to-testit.js results/catLogin400Results.json для чтения этого отчета и загрузки результатов в Test IT
+
+
+Perfomance Take = 800.postman_collection.json
+
+newman run "Perfomance Take = 800.postman_collection.json" --iteration-count 20 --delay-request 1000 -r "cli,json" --reporter-json-export results/test-resultsPerfomance800.json
+
+node newman-to-testit.js results/test-resultsPerfomance800.json
