@@ -26,11 +26,27 @@ async function uploadNewmanResults(newmanJsonPath, testRunName) {
         // Читаем Newman JSON
         console.log('Чтение результатов Newman...');
         const newmanData = JSON.parse(readFileSync(newmanJsonPath, 'utf8'));
-        const execution = newmanData.run.executions[0];
         
-        console.log(`Найдена итерация: ${execution.item.name}`);
-        console.log(`Статус ответа: ${execution.response.code}`);
-        console.log(`Время ответа: ${execution.response.responseTime}ms`);
+
+        // Создаем тест-ран
+        console.log('Создание тест-рана...');
+        const testRunRequest = {
+            //то, что будет выводиться как название тест-рана в Test IT
+            name: testRunName || `Test  of - ${new Date().toLocaleString()}`,
+            projectId: config.projectId
+        };
+        const testRunResponse = await testRunsApi.createEmpty(testRunRequest);
+        const testRunId = testRunResponse.body.id;
+        console.log(`Тест-ран создан: ${testRunId}`);
+
+        const autoTestResults = [];
+
+        // const execution = newmanData.run.executions[0];
+        for (let executionIndex = 0; executionIndex < newmanData.run.executions.length; executionIndex++) {
+            const execution = newmanData.run.executions[executionIndex];
+            console.log(`Найдена итерация: ${execution.item.name}`);
+            console.log(`Статус ответа: ${execution.response.code}`);
+            console.log(`Время ответа: ${execution.response.responseTime}ms`);
 
         // Создаем шаги для каждой проверки (assertion)
         const steps = [];
@@ -68,17 +84,9 @@ async function uploadNewmanResults(newmanJsonPath, testRunName) {
         console.log('Создание автотеста...');
         await autoTestsApi.createAutoTest(autoTest);
 
-        // Создаем тест-ран
-        console.log('Создание тест-рана...');
-        const testRunRequest = {
-            //то, что будет выводиться как название тест-рана в Test IT
-            name: testRunName || `Test  of - ${new Date().toLocaleString()}`,
-            projectId: config.projectId
-        };
+    
 
-        const testRunResponse = await testRunsApi.createEmpty(testRunRequest);
-        const testRunId = testRunResponse.body.id;
-        console.log(`Тест-ран создан: ${testRunId}`);
+      
 
         // Определяем результат (нет ошибок = Passed)
         const hasFailures = newmanData.run.failures.length > 0;
@@ -89,29 +97,29 @@ async function uploadNewmanResults(newmanJsonPath, testRunName) {
         const startTime = new Date(endTime.getTime() - execution.response.responseTime);
 
         // Создаем подробное сообщение с результатами всех проверок
-        let detailedMessage = `${execution.item.name}: ${execution.response.responseTime}ms, Status: ${execution.response.code}\n`;
-        if (execution.assertions && execution.assertions.length > 0) {
-            detailedMessage += 'Проверки:\n';
-            execution.assertions.forEach((assertion, index) => {
-                let status;
-                if (assertion.skipped) {
-                    status = 'SKIPPED';
-                } else if (assertion.error) {
-                    status = 'FAILED';
-                } else {
-                    status = 'PASSED';
-                }
+//         let detailedMessage = `${execution.item.name}: ${execution.response.responseTime}ms, Status: ${execution.response.code}\n`;
+//         if (execution.assertions && execution.assertions.length > 0) {
+//             detailedMessage += 'Проверки:\n';
+//             execution.assertions.forEach((assertion, index) => {
+//                 let status;
+//                 if (assertion.skipped) {
+//                     status = 'SKIPPED';
+//                 } else if (assertion.error) {
+//                     status = 'FAILED';
+//                 } else {
+//                     status = 'PASSED';
+//                 }
         
-            detailedMessage += `${index + 1}. ${assertion.assertion} - ${status}\n`;
+//             detailedMessage += `${index + 1}. ${assertion.assertion} - ${status}\n`;
         
-            // Добавляем детали ошибки для упавших тестов
-            if (assertion.error) {
-                detailedMessage += `   Ошибка: ${assertion.error.message}\n`;
-            }
-        });
-}
+//             // Добавляем детали ошибки для упавших тестов
+//             if (assertion.error) {
+//                 detailedMessage += `   Ошибка: ${assertion.error.message}\n`;
+//             }
+//         });
+// }
 
-        // const autoTestResult = {
+        
         //     configurationId: config.configurationId,
         //     autoTestExternalId: autoTestExternalId,
         //     outcome: outcome,
@@ -127,45 +135,49 @@ async function uploadNewmanResults(newmanJsonPath, testRunName) {
         // };
 
         // Массив результатов - по одному на каждую assertion
-const autoTestResults = [];
-for (const [index, assertion] of execution.assertions.entries()) {
-    const externalId = `newman-${execution.item.name.replace(/\s+/g, '-')}-assertion-${index}-${Date.now()}`;
-    
-    // 1. Создаем автотест
-    const autoTest = {
-        externalId: externalId,
-        name: assertion.assertion,
-        projectId: config.projectId,
-        description: `Newman assertion: ${assertion.assertion}`,
-        steps: [{ title: 'Assertion Check', description: assertion.assertion }]
-    };
-    
-    console.log(`Создание автотеста для: ${assertion.assertion}`);
-    await autoTestsApi.createAutoTest(autoTest);
-    
-    // 2. Создаем результат
-    const assertionResult = {
-        configurationId: config.configurationId,
-        autoTestExternalId: externalId, // ТОТ ЖЕ ID!
-        outcome: assertion.error ? 'Failed' : 'Passed',
-        duration: execution.response.responseTime,
-        message: `${assertion.assertion} - ${assertion.error ? 'FAILED' : 'PASSED'}${assertion.error ? `\nОшибка: ${assertion.error.message}` : ''}`,
-        traces: JSON.stringify({
-            request: execution.request,
-            response: execution.response,
-            assertion: assertion
-        }, null, 2),
-        startedOn: startTime,
-        completedOn: endTime
-    };
-    
-    autoTestResults.push(assertionResult);
-}
+        
+        for (const [index, assertion] of execution.assertions.entries()) {
+            const externalId = `newman-${execution.item.name.replace(/\s+/g, '-')}-assertion-${index}-${Date.now()}`;
+            
+            // 1. Создаем автотест
+            const autoTest = {
+                externalId: externalId,
+                name: assertion.assertion,
+                projectId: config.projectId,
+                description: `Newman assertion: ${assertion.assertion}`,
+                steps: [{ title: 'Assertion Check', description: assertion.assertion }]
+            };
+            
+            console.log(`Создание автотеста для: ${assertion.assertion}`);
+            await autoTestsApi.createAutoTest(autoTest);
+            
+            // 2. Создаем результат
+            const assertionResult = {
+                configurationId: config.configurationId,
+                autoTestExternalId: externalId, // ТОТ ЖЕ ID!
+                outcome: assertion.error ? 'Failed' : 'Passed',
+                duration: execution.response.responseTime,
+                message: `${assertion.assertion} - ${assertion.error ? 'FAILED' : 'PASSED'}${assertion.error ? `\nОшибка: ${assertion.error.message}` : ''}`,
+                traces: JSON.stringify({
+                    request: execution.request,
+                    response: execution.response,
+                    assertion: assertion
+                }, null, 2),
+                startedOn: startTime,
+                completedOn: endTime
+            };
+            
+            autoTestResults.push(assertionResult);
+        }
 
-// В конце - загружаем ВСЕ результаты
-console.log('Загрузка результатов...');
-await testRunsApi.setAutoTestResultsForTestRun(testRunId, autoTestResults);
-  
+    
+            
+        }
+        
+        
+        // В конце - загружаем ВСЕ результаты
+        console.log('Загрузка результатов...');
+        await testRunsApi.setAutoTestResultsForTestRun(testRunId, autoTestResults); 
 
     
         console.log(`Результат загружен: ${outcome}`);
